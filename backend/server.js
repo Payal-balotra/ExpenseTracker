@@ -4,7 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoute = require("./routes/authRoute");
 const incomeRoutes = require("./routes/incomeRoutes");
-const expenseRoutes = require("./routes/expenseRoutes");
+const expenseRoutes =  require("./routes/ExpenseRoutes")
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const path = require("path");
 
@@ -14,8 +14,8 @@ connectDB();
 
 app.use(
   cors({
-    origin: [process.env.CORS_ORIGIN || "http://localhost:5173"],
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+   origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })

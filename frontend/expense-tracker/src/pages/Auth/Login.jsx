@@ -7,7 +7,6 @@ import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosinsatnce";
 import { UserContext } from "../../context/UserContext";
 
-
 // AuthLayout Component
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,16 +38,37 @@ const Login = () => {
     }
 
     try {
-      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, { email, password });
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
       const { token, user } = response.data;
       if (token) {
         localStorage.setItem("token", token);
         updateUser(user);
-        console.log(user)
         navigate("/dashboard");
       }
     } catch (err) {
-      setError(err?.response?.data?.message || "Something went wrong. Please try again.");
+      let errorMessage = "We couldn’t log you in. Please try again.";
+
+      if (
+        err?.response?.status === 404 ||
+        err?.response?.data?.message?.toLowerCase().includes("user not found")
+      ) {
+        errorMessage = "You don’t have an account. Please sign up.";
+      } else if (
+        err?.response?.status === 401 ||
+        err?.response?.data?.message?.toLowerCase().includes("invalid password")
+      ) {
+        errorMessage = "Incorrect password. Please try again.";
+      } else if (err?.response?.status === 400) {
+        errorMessage = "Invalid request. Please check your details.";
+      } else if (err?.response?.status >= 500) {
+        errorMessage =
+          "Server is not responding right now. Please try again later.";
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +113,13 @@ const Login = () => {
             </button>
 
             <p className="text-gray-500 text-sm">
-              Don't have an account? <Link to="/signup" className="text-violet-600 hover:text-violet-700 p-2" >SignUp</Link>
+              Don't have an account?
+              <Link
+                to="/signup"
+                className="text-violet-600 hover:text-violet-700 p-2"
+              >
+             <u>SignUp</u> 
+              </Link>
             </p>
           </form>
         </div>
