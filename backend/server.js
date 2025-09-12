@@ -4,7 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoute = require("./routes/authRoute");
 const incomeRoutes = require("./routes/incomeRoutes");
-const expenseRoutes =  require("./routes/ExpenseRoutes")
+const expenseRoutes =  require("./routes/expenseRoutes")
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const path = require("path");
 
