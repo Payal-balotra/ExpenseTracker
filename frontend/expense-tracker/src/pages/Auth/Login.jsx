@@ -3,7 +3,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/inputs/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
-import { API_PATHS } from "../../utils/apiPaths";
+import { API_PATHS, BASE_URL } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosinsatnce";
 import { UserContext } from "../../context/UserContext";
 
@@ -36,7 +36,7 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
-
+   console.log(BASE_URL)
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,

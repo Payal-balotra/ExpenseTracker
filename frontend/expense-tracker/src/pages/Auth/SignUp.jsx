@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import ProilePhotoSelector from "../../components/inputs/ProilePhotoSelector";
 import axiosInstance from "../../utils/axiosinsatnce";
-import { API_PATHS } from "../../utils/apiPaths";
+import { API_PATHS, BASE_URL } from "../../utils/apiPaths";
 import { UserContext } from "../../context/UserContext";
 import uploadImage from "../../utils/uploadImage";
 
@@ -16,7 +16,6 @@ const SignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
