@@ -17,58 +17,20 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     setIsLoading(true);
-    setError("");
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
-      setIsLoading(false);
-      return;
-    }
-    if (!password) {
-      setError("Password cannot be empty.");
-      setIsLoading(false);
-      return;
-    }
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters long.");
-      setIsLoading(false);
-      return;
-    }
-   console.log(BASE_URL)
     try {
-      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
-        email,
-        password,
-      });
-      const { token, user } = response.data;
-      if (token) {
-        localStorage.setItem("token", token);
-        updateUser(user);
-        navigate("/dashboard");
+      const res = await axiosInstance.post("/api/auth/login", { email, password });
+      const { token, user } = res.data;
+      if (!token) {
+        setError("Login failed: no token returned");
+        return;
       }
+      localStorage.setItem("token", token);
+      updateUser(user);
+      navigate("/dashboard");
     } catch (err) {
-      let errorMessage = "We couldn’t log you in. Please try again.";
-
-      if (
-        err?.response?.status === 404 ||
-        err?.response?.data?.message?.toLowerCase().includes("user not found")
-      ) {
-        errorMessage = "You don’t have an account. Please sign up.";
-      } else if (
-        err?.response?.status === 401 ||
-        err?.response?.data?.message?.toLowerCase().includes("invalid password")
-      ) {
-        errorMessage = "Incorrect password. Please try again.";
-      } else if (err?.response?.status === 400) {
-        errorMessage = "Invalid request. Please check your details.";
-      } else if (err?.response?.status >= 500) {
-        errorMessage =
-          "Server is not responding right now. Please try again later.";
-      }
-
-      setError(errorMessage);
+      setError(err.response?.data?.message || "Login failed");
     } finally {
       setIsLoading(false);
     }

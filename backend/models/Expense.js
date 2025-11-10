@@ -23,6 +23,9 @@ const ExpenseSchema = new Schema({
     icon: {
         type: String,
     },
+    description: {
+        type: String,
+    },
 
 },{timestamps: true});
 

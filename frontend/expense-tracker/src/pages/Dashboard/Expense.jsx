@@ -40,9 +40,9 @@ const Expense = () => {
   };
 
   const handleAddExpense = async (expense) => {
-    const { category, amount, date, icon } = expense;
+    const { category, amount, date, icon, description } = expense;
     if (!category.trim()) {
-      toast.error("Source is required");
+      toast.error("Category is required");
       return;
     }
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
@@ -60,6 +60,7 @@ const Expense = () => {
         amount,
         date,
         icon,
+        description,
       });
 
       setOpenAddExpenseModel(false);
@@ -70,6 +71,7 @@ const Expense = () => {
         "Failed to add expense :",
         err.response?.data?.message || err.message
       );
+      toast.error(err.response?.data?.message || "Failed to add expense");
     }
   };
   const deleteIExpense = async (id) => {

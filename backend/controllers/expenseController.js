@@ -4,7 +4,7 @@ const xlsx = require("xlsx");
 const addExpense = async (req, res) => {
   const userId = req.user.id;
 
-  const { amount, category, icon, date } = req.body;
+  const { amount, category, icon, date, description } = req.body;
   if (!amount || !category) {
     return res.status(400).json({ message: "Please fill all fields"});
   }
@@ -17,7 +17,8 @@ const addExpense = async (req, res) => {
       amount,
       category,
       icon,
-      date: date || new Date()
+      date: date || new Date(),
+      description: description || ""
     });
     await newExpense.save();
     return res

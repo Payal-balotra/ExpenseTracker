@@ -14,6 +14,9 @@ import ExpenseTransactions from "../../components/dashboard/ExpenseTransactions"
 import Last30DaysExpenses from "../../components/dashboard/Last30DaysExpenses";
 import RecentIncomeWithChart from "../../components/dashboard/RecentIncomeWithChart";
 import RecentIncome from "../../components/dashboard/RecentIncome";
+import SmartInsights from "../../components/ai/SmartInsights";
+import MonthlyReport from "../../components/ai/MonthlyReport";
+import FinanceChat from "../../components/ai/FinanceChat";
 
 const Home = () => {
   useUserAuth();
@@ -88,6 +91,18 @@ const Home = () => {
             transactions={dashboardData?.last60DaysIncome?.transactions || []}
             onSeeMore={() => navigate("/income")}
           />
+        </div>
+
+        {/* AI Features Section */}
+        <div className="mt-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">AI-Powered Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <SmartInsights />
+            <MonthlyReport />
+          </div>
+          <div className="mt-6">
+            <FinanceChat />
+          </div>
         </div>
       </div>
     </DashboardLayout>

@@ -23,5 +23,12 @@
         },
         IMAGE: {
             UPLOAD_IMAGE: "/api/auth/upload-image",
+        },
+        AI: {
+            CATEGORIZE: "/api/ai/categorize",
+            GET_INSIGHTS: "/api/ai/insights",
+            GENERATE_REPORT: "/api/ai/report",
+            CHAT: "/api/ai/chat",
+            STATUS: "/api/ai/status",
         }
     };

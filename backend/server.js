@@ -6,6 +6,7 @@ const authRoute = require("./routes/authRoute");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes =  require("./routes/expenseRoutes")
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 const path = require("path");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/income",incomeRoutes);
 app.use("/api/expense",expenseRoutes);
 app.use("/api/dashboard",dashboardRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
