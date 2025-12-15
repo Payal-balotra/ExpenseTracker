@@ -87,10 +87,10 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      <div className="space-y-6">
-        <div className="text-center">
-          <h2 className="text-2xl font-meduim text-gray-900">Create your account</h2>
-          <p className="text-gray-600">Get started with expense tracking</p>
+      <div className="glass-card w-full p-8">
+        <div className="mb-6 text-center md:text-left">
+          <h2 className="text-2xl font-bold text-slate-800">Create Account</h2>
+          <p className="text-slate-500 text-sm">Join WalletIQ today</p>
         </div>
 
         <form onSubmit={handleSignUp} className="space-y-4">
@@ -100,7 +100,7 @@ const SignUp = () => {
             label="Full Name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="Enter your full name"
+            placeholder="John Doe"
             required
           />
 
@@ -109,7 +109,7 @@ const SignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder="john@example.com"
             required
           />
 
@@ -118,13 +118,13 @@ const SignUp = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Create a password"
+            placeholder="Min. 8 characters"
             required
           />
 
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
               {error}
             </div>
           )}
@@ -132,7 +132,7 @@ const SignUp = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full btn-primary hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+            className="btn-primary w-full flex items-center justify-center gap-2 mt-2"
           >
             {isLoading && (
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -141,11 +141,11 @@ const SignUp = () => {
           </button>
         </form>
 
-        <div className="text-center">
-          <p className="text-gray-600">
+        <div className="text-center mt-6">
+          <p className="text-slate-500 text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="text-purple-500 hover:text-blue-700 font-medium">
-              <u> Login</u>
+            <Link to="/login" className="text-violet-600 font-semibold hover:text-violet-700 underline decoration-2 decoration-violet-100 hover:decoration-violet-500 transition-all">
+              Login
             </Link>
           </p>
         </div>

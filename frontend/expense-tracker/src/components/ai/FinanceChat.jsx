@@ -122,47 +122,54 @@ const FinanceChat = () => {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-md flex flex-col" style={{ height: "600px" }}>
-      <div className="flex items-center gap-2 p-4 border-b border-gray-200">
-        <MessageCircle className="w-5 h-5 text-green-500" />
-        <h2 className="text-xl font-bold text-gray-800">AI Finance Assistant</h2>
+    <div className="glass-card flex flex-col h-[600px] p-0 overflow-hidden">
+      <div className="flex items-center gap-3 p-6 border-b border-slate-100 bg-white/40">
+        <div className="p-2 bg-emerald-100 rounded-lg">
+          <MessageCircle className="w-5 h-5 text-emerald-600" />
+        </div>
+        <div>
+           <h2 className="text-lg font-bold text-slate-800">AI Finance Assistant</h2>
+           <p className="text-xs text-slate-500">Ask about your spending & savings</p>
+        </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-violet-200 scrollbar-track-transparent">
         {messages.map((message, index) => (
           <div
             key={index}
             className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
           >
             {message.role === "assistant" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                <Bot className="w-5 h-5 text-green-600" />
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center border border-emerald-200">
+                <Bot className="w-4 h-4 text-emerald-600" />
               </div>
             )}
             <div
-              className={`max-w-[70%] rounded-lg px-4 py-2 ${
-                message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"
+              className={`max-w-[80%] rounded-2xl px-5 py-3 shadow-sm ${
+                message.role === "user" 
+                  ? "bg-violet-600 text-white rounded-br-none" 
+                  : "bg-white border border-slate-100 text-slate-700 rounded-bl-none"
               }`}
             >
-              <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+              <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
             </div>
             {message.role === "user" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                <User className="w-5 h-5 text-blue-600" />
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center border border-violet-200">
+                <User className="w-4 h-4 text-violet-600" />
               </div>
             )}
           </div>
         ))}
         {loading && (
           <div className="flex gap-3 justify-start">
-            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-              <Bot className="w-5 h-5 text-green-600" />
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+              <Bot className="w-4 h-4 text-emerald-600" />
             </div>
-            <div className="bg-gray-100 rounded-lg px-4 py-2">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+            <div className="bg-white border border-slate-100 rounded-2xl p-4 rounded-bl-none">
+              <div className="flex gap-1.5">
+                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-75"></div>
+                <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-150"></div>
               </div>
             </div>
           </div>
@@ -171,14 +178,14 @@ const FinanceChat = () => {
       </div>
 
       {messages.length === 1 && (
-        <div className="px-4 pb-2">
-          <p className="text-xs text-gray-500 mb-2">Suggested questions:</p>
+        <div className="px-6 pb-4">
+          <p className="text-xs text-slate-500 mb-3 font-medium uppercase tracking-wider">Suggested questions:</p>
           <div className="flex flex-wrap gap-2">
             {suggestedQuestions.map((question, index) => (
               <button
                 key={index}
                 onClick={() => setInput(question)}
-                className="text-xs px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 transition-colors"
+                className="text-xs px-3 py-1.5 bg-white border border-slate-200 hover:border-violet-300 hover:bg-violet-50 rounded-full text-slate-600 transition-all duration-200"
               >
                 {question}
               </button>
@@ -188,31 +195,32 @@ const FinanceChat = () => {
       )}
 
       {checkingStatus ? (
-        <div className="p-4 border-t border-gray-200 text-center text-gray-500">
+        <div className="p-4 border-t border-slate-100 text-center text-slate-400 text-xs">
           Checking AI service status...
         </div>
       ) : !aiAvailable ? (
-        <div className="p-4 border-t border-gray-200 bg-yellow-50">
-          <p className="text-sm text-yellow-800">
-            <strong>AI Service Unavailable{providerName ? ` (${providerName})` : ""}:</strong>
+        <div className="p-4 border-t border-slate-100 bg-amber-50">
+          <p className="text-sm text-amber-800 flex items-center gap-2">
+            <Bot className="w-4 h-4" />
+            <strong>AI Unavailable{providerName ? ` (${providerName})` : ""}:</strong>
           </p>
-          <div className="mt-2 text-sm text-yellow-900">{statusMessage}</div>
+          <div className="mt-1 text-xs text-amber-700 pl-6">{statusMessage}</div>
         </div>
       ) : (
-        <form onSubmit={handleSend} className="p-4 border-t border-gray-200">
+        <form onSubmit={handleSend} className="p-4 border-t border-slate-100 bg-white/40">
           <div className="flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about your finances..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="flex-1 px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 text-slate-700 placeholder-slate-400 text-sm shadow-sm"
               disabled={loading || !aiAvailable}
             />
             <button
               type="submit"
               disabled={loading || !input.trim() || !aiAvailable}
-              className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all shadow-lg shadow-violet-200 active:scale-95 flex items-center justify-center"
             >
               <Send className="w-5 h-5" />
             </button>

@@ -1,38 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-@theme{
-  --font-display:"Poppins","sans-serif";
-  --breakpoint-3xl :1920px  ;
-  --color-primary : #875CF5
+
+@theme {
+  --font-display: "Outfit", sans-serif;
+  --color-primary: #8b5cf6;
+  --color-secondary: #ec4899;
+  
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
 }
 
-@layer base{
-  html{
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@layer base {
+  html {
     font-family: var(--font-display);
   }
-  body{
-    background-color: "#fcfbfc";
+  body {
+    background-color: #f8fafc; /* Light Slate 50 */
+    color: #1e293b; /* Slate 800 */
     overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(221, 214, 254, 0.4) 0%, transparent 40%), /* Soft Purple */
+      radial-gradient(circle at 90% 80%, rgba(254, 202, 202, 0.3) 0%, transparent 40%), /* Soft Red/Peach */
+      radial-gradient(circle at 50% 50%, rgba(186, 230, 253, 0.3) 0%, transparent 40%); /* Soft Blue */
+    background-attachment: fixed;
   }
 }
 
-.input-box{
-  @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4  mt-3 border border-slate-200 outline-none
-}
-.btn-primary{
-  @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600
-}
-.card{
-  @apply bg-white p-6 rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50
-}
-.card-btn{
-  @apply flex items-center gap-3 text-[12px] font-medium text-gray-700 hover:text-purple-500 bg-gray-50 hover:bg-purple-50 py-4 px-1.5 rounded-lg border border-gray-200/50 cursor-pointer
-}
-.add-btn{
-  @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-600 whitespace-nowrap bg-purple-50 border border-purple-100 rounded-lg px-4 py-2 cursor-pointer
-}
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/40 border border-white/60 shadow-lg shadow-slate-200/50;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/60 border border-white/60 shadow-xl shadow-slate-200/40 rounded-3xl p-6 transition-all duration-300 hover:bg-white/70 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-1;
+  }
 
-.add-btn-fill{
-  @apply text-white bg-primary
+  /* Stronger glass for important elements */
+  .glass-heavy {
+    @apply backdrop-blur-2xl bg-white/80 border border-white/80 shadow-2xl shadow-slate-300/50;
+  }
+
+  .input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-slate-700 bg-white/50 rounded-xl px-4 py-3 mb-4 mt-3 border border-slate-200 focus:border-violet-500/50 outline-none transition-all placeholder:text-slate-400 focus:bg-white/80 focus:shadow-md focus:shadow-violet-200/50;
+  }
+
+  .btn-primary {
+    @apply w-full text-sm font-bold text-white bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 shadow-lg shadow-violet-300/50 p-[12px] rounded-xl my-1 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .card-btn {
+    @apply flex items-center gap-2 text-[12px] font-semibold text-slate-600 hover:text-violet-600 bg-white/50 hover:bg-white/80 py-2.5 px-4 rounded-xl border border-white/60 cursor-pointer transition-all hover:shadow-md hover:border-violet-200;
+  }
+
+  .add-btn {
+    @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-white whitespace-nowrap bg-gradient-to-r from-violet-500 to-fuchsia-500 shadow-md shadow-violet-200/50 rounded-xl px-4 py-2 cursor-pointer hover:shadow-lg transition-all hover:-translate-y-0.5;
+  }
+  
+  /* Custom Tooltip Styling if needed */
+  .custom-tooltip {
+    @apply !bg-slate-800 !text-white !px-3 !py-1.5 !rounded-lg !text-xs !font-medium !shadow-xl;
+  }
 }

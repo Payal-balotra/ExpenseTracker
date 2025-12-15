@@ -38,53 +38,53 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="w-full bg-white p-8 rounded-2xl shadow-lg">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl text-gray-900">Welcome Back</h2>
-            <p className="text-gray-500 mt-2">Log in to your account</p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-5 w-full">
-            <Input
-              type="email"
-              label="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
-            <Input
-              type="password"
-              label="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-            />
-
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600"
-            >
-              LOGIN
-            </button>
-
-            <p className="text-gray-500 text-sm">
-              Don't have an account?
-              <Link
-                to="/signup"
-                className="text-violet-600 hover:text-violet-700 p-2"
-              >
-             <u>SignUp</u> 
-              </Link>
-            </p>
-          </form>
+      <div className="glass-card w-full p-8 md:p-10">
+        <div className="mb-8 text-center md:text-left">
+          <h2 className="text-2xl font-bold text-slate-800">Welcome Back</h2>
+          <p className="text-slate-500 text-sm mt-1">Please enter your details to sign in.</p>
         </div>
+
+        <form onSubmit={handleLogin} className="space-y-4">
+          <Input
+            type="email"
+            label="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
+          <Input
+            type="password"
+            label="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+          />
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-600"/>
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="btn-primary w-full mt-4"
+            disabled={isLoading}
+          >
+             {isLoading ? "Signing in..." : "LOGIN"}
+          </button>
+
+          <p className="text-slate-500 text-sm text-center mt-6">
+            Don't have an account?
+            <Link
+              to="/signup"
+              className="text-violet-600 font-semibold hover:text-violet-700 ml-1 underline decoration-2 decoration-violet-100 hover:decoration-violet-500 transition-all"
+            >
+              Sign Up
+            </Link>
+          </p>
+        </form>
       </div>
     </AuthLayout>
   );

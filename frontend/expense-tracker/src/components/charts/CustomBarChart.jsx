@@ -75,21 +75,21 @@ const CustomTooltip = ({ active, payload }) => {
   }
 
   return (
-    <div className="bg-white mt-6">
+    <div className="mt-6">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
           <XAxis
             dataKey={type === "income" ? "label" : "date"}
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#64748b" }}
             stroke="none"
             angle={type === "income" ? -30 : 0}
             textAnchor={type === "income" ? "end" : "middle"}
             height={type === "income" ? 80 : 40}
           />
-          <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
-          <Tooltip content={CustomTooltip} />
-          <Bar dataKey="amount" radius={[10, 10, 0, 0]}>
+          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} stroke="none" />
+          <Tooltip content={CustomTooltip} cursor={{ fill: 'rgba(139, 92, 246, 0.05)' }} />
+          <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
             {chartData.map((entry, index) => (
               <Cell key={index} fill={getBarColor(index)} />
             ))}
