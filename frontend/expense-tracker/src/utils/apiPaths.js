@@ -6,7 +6,7 @@
             REGISTER: "/api/auth/register",
             GET_USER_INFO: "/api/auth/getUser",
         },
-        DASHBOARD: {
+        DASHBOARD: {    
             GET_DATA: "/api/dashboard",
         },
         INCOME: {
